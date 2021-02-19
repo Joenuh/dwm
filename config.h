@@ -93,8 +93,13 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[]	= { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  	= { "st", NULL };
-static const char *xbcklinc[]	= { "xbacklight", "-inc", "10", NULL };
-static const char *xbckldec[]	= { "xbacklight", "-dec", "10", NULL };
+
+static const char *xbcklinc[]	= { "xbacklight", "-inc", "5", NULL };
+static const char *xbckldec[]	= { "xbacklight", "-dec", "5", NULL };
+
+static const char *amixtog[]	= { "amixer", "set", "Master", "toggle", NULL};
+static const char *amixinc[]	= { "amixer", "set", "Master", "5%+", NULL};
+static const char *amixdec[]	= { "amixer", "set", "Master", "5%-", NULL};
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -121,6 +126,9 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ MODKEY,			XK_F1, 	   spawn,	   {.v = amixtog } },
+	{ MODKEY,			XK_F2, 	   spawn,	   {.v = amixdec } },
+	{ MODKEY, 			XK_F3,	   spawn,	   {.v = amixinc } },
 	{ MODKEY,                       XK_F4,     xrdb,           {.v = NULL } },
 	{ MODKEY,			XK_F5,	   spawn,  	   {.v = xbckldec } },
 	{ MODKEY, 			XK_F6,	   spawn,	   {.v = xbcklinc } },
